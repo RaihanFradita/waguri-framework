@@ -33,20 +33,25 @@ class WaguriClient:
 
         check = check_evidence(answer, evidence)
 
+        evidence_ids: list[str] = []
+        if check.matched_evidence is not None:
+            for index, item in enumerate(evidence):
+                if item == check.matched_evidence:
+                    evidence_ids = [str(index)]
+                    break
+
         claim = ClaimResult(
             text=answer,
             status=check.status,
-            evidence_ids=(
-                [str(evidence.index(check.matched_evidence))]
-                if check.matched_evidence is not None
-                else []
-            ),
+            evidence_ids=evidence_ids,
             reason=check.reason,
         )
 
+        response_status = "rejected" if check.status == "unsupported" else "needs_review"
+
         return WaguriResult(
             answer=answer,
-            status="needs_review",
+            status=response_status,
             claims=[claim],
             metrics={
                 "evidence_match": int(check.status == "supported"),

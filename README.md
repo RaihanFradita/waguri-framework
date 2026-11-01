@@ -11,6 +11,16 @@ and controlled response generation.
 - Local and cloud model adapter support
 - Evidence-aware response validation (in development)
 - Response quality evaluation (planned)
+- Context and token-budget optimization utilities
+
+## Project structure
+
+- `src/waguri/adapters/`: model adapter protocol and implementations
+- `src/waguri/validation/`: claim splitting and evidence checks
+- `src/waguri/optimization/`: context fitting, token estimation, and response cache
+- `src/waguri/evaluation/`: benchmark result types and exact-match evaluation
+- `tests/`: unit tests
+- `examples/`: runnable usage examples
 
 ## Requirements
 

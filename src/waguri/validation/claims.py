@@ -1,5 +1,6 @@
 import re
 
+
 def split_claims(answer: str) -> list[str]:
     """
     Split an answer into sentence-like claims.
@@ -9,5 +10,6 @@ def split_claims(answer: str) -> list[str]:
     if not answer or not answer.strip():
         return []
 
-    parts = re.split(r"(?<=[.!?])\s+", answer.strip())
+    text = answer.strip()
+    parts = re.split(r"(?<=[.!?])\s+|(?<=\n)\s*|(?<=;)\s+", text)
     return [part.strip() for part in parts if part.strip()]
